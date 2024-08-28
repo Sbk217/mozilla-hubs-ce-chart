@@ -19,8 +19,9 @@ ENV_OUTPUT="configs:\n  data:\n"
 ### required
 HUB_DOMAIN=$1
 ADM_EMAIL=$2
-DB_USER="postgres"
-DB_PASS="123456"
+DB_USER="Your_DB_user_name" #set this
+DB_PASS="Your_Password" #set this
+#Make sure not to give @ in your password as that can result in issue during postgrest pod execution and DB access
 DB_NAME="retdb"
 DB_HOST="pgbouncer"
 DB_HOST_T="pgbouncer-t"
@@ -28,16 +29,16 @@ EXT_DB_HOST="pgsql"
 PGRST_DB_URI="postgres://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME"
 PSQL="postgres://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME"
 # Update with your STMP server settings
-SMTP_SERVER="{YOUR_SMTP_SERVER}"
+SMTP_SERVER="{YOUR_SMTP_SERVER}" #set this according to SMTP setup For the project it was "smtp.sendgrid.net"
 SMTP_PORT="587"
-SMTP_USER="{YOUR_SMTP_USER}"
-SMTP_PASS="{YOUR_SMTP_PASS}"
+SMTP_USER="{YOUR_SMTP_USER}" #set this according to SMTP setup For the project it was "apikey"
+SMTP_PASS="{YOUR_SMTP_PASS}" #set this according to SMTP setup For the project it was the created API key
 
-NODE_COOKIE="node-{YOUR_NODE_COOKIE_ID}"
-GUARDIAN_KEY="{YOUR_GUARDIAN_KEY}"
-PHX_KEY="{YOUR_PHX_KEY}"
+NODE_COOKIE="node-{YOUR_NODE_COOKIE_ID}" #this can be anything
+GUARDIAN_KEY="{YOUR_GUARDIAN_KEY}" #this can be anything
+PHX_KEY="{YOUR_PHX_KEY}" #this can be anything
 
-SKETCHFAB_API_KEY="?"
+SKETCHFAB_API_KEY="?" #Make sure to give the API key if you want to access sketchfab work via the admin console of Mozilla Hubs CE
 TENOR_API_KEY="?"
 
 ### generate keys and new jwt secret

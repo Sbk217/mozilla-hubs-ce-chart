@@ -1,22 +1,29 @@
-# Welcome to the Mozilla Hubs Community Edition Chart!
+# Welcome to the Mozilla Hubs Community Edition Helm Chart version for TU Ilmenau Research Project S4_VWDS6 done in SS2024 !
+# In our setup 2 bare metal on-premise university servers were given 
+# Master server - Server 1
+# Worker server - Server 2
 
-To start you need a kubernetes cluster. 
-Your worker nodes should have these ports open:
-* TCP: 80, 443, 4443, 5349
-* UDP: 35000 - 60000
+1. To start you need a kubernetes Rancher kubernetes engine 2 (RKE2) cluster setup of which is described in the Project Report. 
+2. Your worker node/nodes should have these ports open as done via UFW in the project:
+   * TCP: 80, 443, 4443, 5349 //For Mozilla Hubs CE only
+   * UDP: 35000 - 60000 //For Mozilla Hubs CE only
+   * Additonal ports required for the RKE2 cluster and pod networking are described in the Project Report.
+  
+3. A Load balancer is required for Networking load balancing (which are by default present in cloud clusters) since we are setting up the cluster on bare metal servers.
+   This is done through the use of MetalLb, steps of which are described in the Project Report.
 
 
 ## Setup SSL Certs
-We need a few ssl certs and cert manager allows us to automate the request but also the renewal of the certs. lets install it!
+4. We need a few ssl certs and cert manager allows us to automate the request but also the renewal of the certs. lets install it!
 ### Install cert-manager 
 See https://cert-manager.io/docs/installation/helm/ for more information
 
 ```
-    kubectl create ns security
+    kubectl create ns cert-manager
     helm repo add jetstack https://charts.jetstack.io
     helm repo update
     helm install cert-manager jetstack/cert-manager \
-     --namespace security \
+     --namespace cert-manager \
      --set ingressShim.defaultIssuerName=letsencrypt-issuer \
      --set ingressShim.defaultIssuerKind=ClusterIssuer \
      --set installCRDs=true
